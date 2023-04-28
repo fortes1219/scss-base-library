@@ -1,0 +1,48 @@
+@use 'sass:math';
+// 主題名稱前綴，可以依照專案不同版型替換名稱
+$theme-prefix: 'nt';
+
+/* import config Libs */
+@import './config/theme.scss';
+@import './config/easing.scss';
+@import './config/mixins';
+@import './config/flexbox.scss';
+@import './config/grid.scss';
+@import './config/remAdaptor.scss';
+@import './config/typography.scss';
+
+/* import tailwindCSS Libs */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* import google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+//
+
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus,
+:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+html, body, #app {
+  height: 100%;
+  font-size: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+}

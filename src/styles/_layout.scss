@@ -1,0 +1,66 @@
+$theme: (
+  bg-color: #0b090c,
+  nav-font-color: #4274f0,
+);
+
+#app {
+  background-color: map-get($theme, bg-color);
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.cp-hilight {
+  color: #EFDD6E;
+}
+
+/*== main ==*/
+
+main {
+  @include flexBox(column, center, center);
+  width: 100%;
+  height: 100%;
+  padding: px-to-rem(10px);
+  .container {
+    @include flexBox(column, center, center);
+    width: px-to-rem(800px);
+    height: px-to-rem(600px);
+    max-width: 100%;
+  }
+  h1 {
+    color: useColor('semantic', 'negative');
+    font-size: px-to-rem(60px);
+    margin-bottom: px-to-rem(40px);
+  }
+}
+
+/*== article ==*/
+
+article {
+  @include flexBox(column, center, center);
+  padding: 0 px-to-rem(10px);
+  p {
+    line-height: px-to-rem(20px);
+    color: #fff;
+  }
+}
+
+/*== nav ==*/
+
+nav {
+  @include flexBox(row, center, space-between);
+  width: px-to-rem(240px);
+  padding: px-to-rem(10px);
+  color: map-get($theme, nav-font-color);
+  * {
+    @include useEaseInOut(0.3s);
+  }
+  a {
+    font-size: px-to-rem(21px);
+    color: map-get($theme, nav-font-color);
+    text-decoration: none;
+    &:hover {
+      color: #EFDD6E;
+    }
+  }
+}

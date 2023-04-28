@@ -1,0 +1,79 @@
+$button-config: (
+  primary: (
+    font-color: #443810,
+    bg-color: linear-gradient(180deg, #BAA671 6.82%, #D4BE81 94.32%),
+    border-color: transparent,
+  ),
+  primary-plain: (
+    font-color: #BAA671,
+    bg-color: transparent,
+    border-color: #BAA671,
+  ),
+  default: (
+    font-color: #000000,
+    bg-color: #FFFFFF,
+    border-color: transparent,
+  ),
+  default-plain: (
+    font-color: #FFFFFF,
+    bg-color: transparent,
+    border-color: #FFFFFF,
+  ),
+);
+
+$button-size: (
+  sm: (
+    size: (80px, 32px),
+    font-size: 12px
+  ),
+  md: (
+    size: (100px, 44px),
+    font-size: 14px
+  ),
+  lg: (
+    size: (120px, 50px),
+    font-size: 16px
+  ),
+  default: (
+    size: (152px, 36px),
+    font-size: 14px
+  ),
+);
+
+$button-round-config: (
+  sm: 4px,
+  md: 6px,
+  lg: 12px,
+);
+
+@each $button, $properties in $button-config {
+  .c88-btn-#{$button} {
+    @include flexBox(row, center, center);
+    color: map-get($properties, font-color);
+    border-color: map-get($properties, border-color);
+    border: 1px solid;
+    font-weight: bold;
+    @if str-index(inspect(map-get($properties, bg-color)), 'linear-gradient') {
+      background: map-get($properties, bg-color);
+    } @else {
+      background-color: map-get($properties, bg-color);
+    }
+    @each $size, $value in $button-size {
+      &.size-#{$size} {
+        width: px-to-rem(nth(map-get($value, size), 1));
+        height: px-to-rem(nth(map-get($value, size), 2));
+        font-size: px-to-rem(map-get($value, font-size));
+      }
+    }
+    @each $round-size in (sm, md, lg) {
+      &.round-#{$round-size} {
+        border-radius: map-get($button-round-config, $round-size);
+      }
+    }
+    a {
+      @include flexBox(row, center, center);
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,102 @@
+/*==== Theme Colors ===*/
+
+$themeColor: (
+  primary: (
+    default: #0051ff,
+    400: #6e67ff,
+    300: #6a8cfa,
+    200: #79a4ff,
+    100: #89c4ff,
+  ),
+  secondary: (
+    default: #d4bc79,
+    300: #af9a63,
+    200: #d3bf89,
+    100: #f9e4b5,
+  ),
+  accent: (
+    default: #fbe14b,
+    700: #c7b20e,
+    600: #d1bb1e,
+    500: #dcc42b,
+    400: #e6ce37,
+    300: #f0d741,
+    200: #fbe14b,
+    100: #ffea55,
+  ),
+  neutral: (
+    light: #161300,
+    dark: #14181B,
+    900: #F6F7F8,
+    800: #DFE1E3,
+    700: #C0C6CE,
+    600: #938256,
+    500: #8E7E52,
+    400: #2F3541
+  ),
+  semantic: (
+    negative: #ff4f4f,
+    warning: #e9c339,
+    positive: #65e062,
+    loading: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5))
+  ),
+  aurora: (
+    default: #03fc96
+  ),
+  transparent: (
+    default: transparent,
+    dark-05: rgba(22, 24, 25, 0.05),
+    dark-10: rgba(22, 24, 25, 0.1),
+    dark-20: rgba(22, 24, 25, 0.2),
+    dark-40: rgba(14, 24, 33, 0.4),
+    dark-60: rgba(14, 24, 33, 0.6),
+    dark-80: rgba(14, 24, 33, 0.8),
+    light-10: rgba(255, 255, 255, 0.1),
+    light-20: rgba(255, 255, 255, 0.2),
+    light-40: rgba(255, 255, 255, 0.4),
+    light-50: rgba(255, 255, 255, 0.5),
+    light-60: rgba(255, 255, 255, 0.6),
+    light-80: rgba(255, 255, 255, 0.8)
+  ),
+  white: (
+    default: #ffffff,
+    opacity-1: rgba(255, 255, 255, 0.1),
+    opacity-2: rgba(255, 255, 255, 0.2),
+    opacity-3: rgba(255, 255, 255, 0.3),
+    opacity-4: rgba(255, 255, 255, 0.4),
+    opacity-5: rgba(255, 255, 255, 0.5),
+    opacity-6: rgba(255, 255, 255, 0.6),
+    opacity-7: rgba(255, 255, 255, 0.7),
+    opacity-8: rgba(255, 255, 255, 0.8),
+    opacity-9: rgba(255, 255, 255, 0.9)
+  )
+);
+
+@each $category, $color in $themeColor {
+  @each $variant, $value in $color {
+    @if type-of($value) == map {
+      @each $subvariant, $subvalue in $value {
+        .#{$theme-prefix}-#{'' + $category}-#{$subvariant} {
+          @if str-index(inspect($subvalue), 'linear-gradient') {
+            background: $subvalue;
+          } @else {
+            color: $subvalue;
+          }
+        }
+      }
+    } @else {
+      .#{$theme-prefix}-#{'' + $category}-#{$variant} {
+        @if str-index(inspect($value), 'linear-gradient') {
+          background: $value;
+        } @else {
+          color: $value;
+        }
+      }
+    }
+  }
+}
+
+@function useColor($category, $variant: 'default') {
+  $color: map-get(map-get($themeColor, $category), $variant);
+  @return $color;
+}
